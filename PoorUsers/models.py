@@ -15,4 +15,4 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     dob = models.DateField()
     photo = models.ImageField(upload_to='uploads', blank=True)
-    phone = models.FloatField(default='0')
+    phone = models.IntegerField(default='0')
