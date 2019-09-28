@@ -2,13 +2,18 @@
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
-# from PoorUsers import views
+from rest_framework.authtoken import views
 
-# router = routers.DefaultRouter()
-# router.register(r'users', views.UserViewSet)
+from PoorUsers import views as UserViews
+
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViews.CustomUserViewSet)
 
 urlpatterns = [
-    # path('', include(router.urls)),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+    path(r'api-auth-token/', views.obtain_auth_token),
+
 ]

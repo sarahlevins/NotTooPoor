@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'PoorUsers.User'
+
+
+AUTH_USER_MODEL = 'PoorUsers.CustomUser'
 
 
 # Application definition
@@ -40,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'PoorUsers'
+    'rest_framework.authtoken',
+    'PoorUsers.apps.PoorusersConfig',
+    'PoorEvents.apps.PooreventsConfig'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +58,9 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
 
 ROOT_URLCONF = 'NotTooPoor.urls'

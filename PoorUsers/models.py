@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Permission, Group
 from django.conf import settings
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     username = models.CharField(max_length=50, default='', unique = True)
     email = models.EmailField(('email address'), unique=True)
     first_name = models.CharField(max_length=50, default='')
