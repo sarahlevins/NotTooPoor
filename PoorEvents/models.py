@@ -7,14 +7,14 @@ from PoorUsers.models import CustomUser
 class Event(models.Model):
     event_name = models.CharField(max_length=50, default='')
     event_description = models.CharField(max_length=500, default='')
-    event_venue = models.ManyToManyField('Venue')
+    event_venue = models.ForeignKey('Venue', on_delete=models.DO_NOTHING, default='')
     event_start_datetime = models.DateTimeField('start time and date')
     event_end_datetime = models.DateTimeField('end time and date')
-    event_photo = models.ImageField(upload_to = 'media/event_photos', null=True)
-    host = models.ForeignKey (settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null = "True")
+    event_photo = models.ImageField(upload_to ='media/event_photos', blank=True)
+    host = models.ForeignKey (settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, default='')
 
-    # def get_absolute_url(self):
-    #     return reverse("PoorEvents:event", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("PoorEvents:event", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.event_name
@@ -27,10 +27,13 @@ class Category(models.Model):
 
 class Venue(models.Model):
     venue_name = models.CharField(max_length=50, default='')
-    venue_address = models.CharField(max_length=500, default='')
-    venue_phone = models.FloatField(default ='0')
+    venue_streetnum = models.IntegerField(default=0, blank=True)
+    venue_street = models.CharField(max_length=50, default='')
+    venue_suburb = models.CharField(max_length=50, default='')
+    venue_postcode = models.IntegerField(default='')
+    venue_website = models.URLField(max_length=100, default='')
     venue_email = models.CharField(max_length=50, default='')
-    venue_photo = models.ImageField(upload_to='media/venue_photos', null=True)
+    venue_photo = models.ImageField(upload_to='media/venue_photos', blank=True)
     
     def __str__(self):
         return self.venue_name
