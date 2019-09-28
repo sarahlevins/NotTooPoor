@@ -5,10 +5,14 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 
 from PoorUsers import views as UserViews
+from PoorEvents import views as EventViews 
 
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViews.CustomUserViewSet)
+router.register(r'events', EventViews.EventViewSet)
+router.register(r'venues', EventViews.VenueViewSet)
+router.register(r'categories', EventViews.CategoryViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

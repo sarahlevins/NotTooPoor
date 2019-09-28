@@ -20,10 +20,10 @@ class Event(models.Model):
         return self.event_name
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    category_name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.category_name
 
 class Venue(models.Model):
     venue_name = models.CharField(max_length=50, default='')
@@ -31,3 +31,6 @@ class Venue(models.Model):
     venue_phone = models.FloatField(default ='0')
     venue_email = models.CharField(max_length=50, default='')
     venue_photo = models.ImageField(upload_to='media/venue_photos', null=True)
+    
+    def __str__(self):
+        return self.venue_name

@@ -14,3 +14,4 @@ urlpatterns = format_suffix_patterns([
     path('users/', user_list, name='user-list'),
     path('users/<int:pk>/', user_detail, name='user-detail')
 ])
+
