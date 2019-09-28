@@ -1,10 +1,27 @@
-from django.contrib.auth.models import User
 from rest_framework import viewsets
-from .serializers import UserSerializer
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import CustomUser
+from .serializers import CustomUserSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint allowing users to be viewed and editied
-    """
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class =  UserSerializer
+class CustomUserViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        user = self.request.user
+        return CustomUser.objects.filter(pk=user.id)
+
+    # def retrieve(self, request, pk=None):
+    #     queryset = CustomUser.objects.all()
+    #     user = get_object_or_404(queryset, pk=pk)
+    #     print(user)
+    #     serializer = CustomUserSerializer(user)
+    #     print(serializer.data)
+    #     print(repr(serializer))
+    #     return Response(serializer.data)
+
+
+    
