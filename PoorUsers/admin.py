@@ -12,9 +12,16 @@ class UserProfileInline(admin.StackedInline):
 @admin.register(CustomUser)
 class CustomUserAdmin(BaseUserAdmin):
     fieldsets = (
-        (None, {'fields': ('username','email', 'password', 'first_name', 'last_name')}),
-        (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+        (None, {'fields': (
+            'email', 
+            'password', 
+            )}),
+        (('Permissions'), {'fields': (
+            'is_active', 
+            'is_staff', 
+            'is_superuser',
+            'groups', 
+            'user_permissions')}),
         (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     """
@@ -23,7 +30,11 @@ class CustomUserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields': (
+                'email',  
+                'password1', 
+                'password2'
+                ),
         }),
     )
     list_display = ('username','email', 'first_name', 'last_name', 'is_staff')
