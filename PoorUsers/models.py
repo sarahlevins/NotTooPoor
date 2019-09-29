@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Permission, Group
 from django.conf import settings
+from PoorEvents.models import Category
 
 class CustomUser(AbstractUser):
     username = models.CharField(max_length=50, default='', unique = True)
@@ -16,3 +17,5 @@ class UserProfile(models.Model):
     dob = models.DateField()
     photo = models.ImageField(upload_to='uploads', blank=True)
     phone = models.IntegerField(default='0')
+    favourite_categories = models.ManyToManyField('PoorEvents.Category', blank=True, default='')
+    

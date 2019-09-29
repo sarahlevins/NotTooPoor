@@ -1,7 +1,14 @@
 from rest_framework import serializers
-from PoorUsers.serializers import CustomUserSerializer
 from .models import Event, Category, Venue
+from PoorUsers.serializers import CustomUserSerializer
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = [
+            'category_name'
+        ]
 
 class VenueSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,24 +24,22 @@ class VenueSerializer(serializers.ModelSerializer):
             'venue_photo'
         ]
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = [
-            'category_name'
-        ]
 
 class EventSerializer(serializers.ModelSerializer):
-    deets = VenueSerializer(read_only=True)
+    venue = VenueSerializer(read_only=True)
     host = CustomUserSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+
     class Meta:
         model = Event
         fields = [
             'event_name',
             'event_description', 
-            'deets', 
+            'venue', 
             'event_start_datetime',
             'event_end_datetime',
             'event_photo',
-            'host'
+            'host',
+            'category',
             ]
+

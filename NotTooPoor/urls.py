@@ -12,6 +12,7 @@ from PoorEvents import views as EventViews
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViews.CustomUserViewSet)
+router.register(r'userprofiles', UserViews.UserProfileViewSet)
 router.register(r'events', EventViews.EventViewSet)
 router.register(r'venues', EventViews.VenueViewSet)
 router.register(r'categories', EventViews.CategoryViewSet)
