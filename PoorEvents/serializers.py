@@ -7,7 +7,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
-            'category_name'
+            'category'
         ]
 
 class VenueSerializer(serializers.ModelSerializer):
@@ -24,22 +24,23 @@ class VenueSerializer(serializers.ModelSerializer):
             'venue_photo'
         ]
 
-
 class EventSerializer(serializers.ModelSerializer):
-    venue = VenueSerializer(read_only=True)
-    host = CustomUserSerializer(read_only=True)
-    category = CategorySerializer(read_only=True)
+    event_venue = VenueSerializer(read_only=True)
+    category = CategorySerializer(many=True, read_only=True)
+    host = CustomUserSerializer(read_only=True)    
+    attendees = CustomUserSerializer(many=True, read_only=True)
 
     class Meta:
         model = Event
         fields = [
             'event_name',
             'event_description', 
-            'venue', 
+            'event_venue', 
             'event_start_datetime',
             'event_end_datetime',
             'event_photo',
             'host',
             'category',
+            'attendees',
             ]
 

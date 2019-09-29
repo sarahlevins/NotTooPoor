@@ -11,7 +11,8 @@ class Event(models.Model):
     event_end_datetime = models.DateTimeField('end time and date')
     event_photo = models.ImageField(upload_to ='media/event_photos', blank=True)
     host = models.ForeignKey (settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, default='')
-    categories = models.ManyToManyField('Category', default='')
+    category = models.ManyToManyField('Category', default='')
+    attendees = models.ManyToManyField('PoorUsers.CustomUser', related_name='attendees', default='')
 
     def get_absolute_url(self):
         return reverse("PoorEvents:event", kwargs={"pk": self.pk})
@@ -20,10 +21,10 @@ class Event(models.Model):
         return self.event_name
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=50)
+    category = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.category_name
+        return self.category
 
 class Venue(models.Model):
     venue_name = models.CharField(max_length=50, default='')

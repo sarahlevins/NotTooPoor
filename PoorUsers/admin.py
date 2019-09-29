@@ -13,11 +13,8 @@ class UserProfileInline(admin.StackedInline):
 class CustomUserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': (
-            'username',
             'email', 
             'password', 
-            'first_name', 
-            'last_name',
             )}),
         (('Permissions'), {'fields': (
             'is_active', 
@@ -34,10 +31,7 @@ class CustomUserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
-                'username', 
-                'email', 
-                'first_name', 
-                'last_name', 
+                'email',  
                 'password1', 
                 'password2'
                 ),
