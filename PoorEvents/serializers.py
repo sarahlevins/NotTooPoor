@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from PoorEvents.models import Category, Venue, Event, UserEventPreferences
+from PoorUsers.serializers import CustomUserSerializer
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,8 +27,6 @@ class VenueSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):    
     event_venue = VenueSerializer(read_only=True)
     category = CategorySerializer(many=True, read_only=True)
-
-    from PoorUsers.serializers import CustomUserSerializer
     host = CustomUserSerializer(read_only=True)    
     attendees = CustomUserSerializer(many=True, read_only=True)
 
@@ -48,6 +48,7 @@ class UserEventPreferencesSerializer(serializers.ModelSerializer):
     fav_category = CategorySerializer(many=True)
     fav_venues = VenueSerializer(many=True)
     fav_events = EventSerializer(many=True)
+    user = CustomUserSerializer()
 
     class Meta:
         model = UserEventPreferences
