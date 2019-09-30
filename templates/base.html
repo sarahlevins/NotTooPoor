@@ -8,6 +8,12 @@
         <title>You're Not Too Poor</title>
         <meta name="description" content="">
         <meta name="author" content="Sarah Levins">
+        <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+        <script type="text/javascript" src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static '/admin/css/widgets.css' %}">
+        <style>
+            .calendar>table>caption{caption-side:unset}
+        </style><!--caption fix for bootstrap4-->
 
     </head>
 

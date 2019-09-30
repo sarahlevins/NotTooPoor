@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" novalidate>
+    {{ neweventform.media }}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" value="Update" class="btn btn-primary">Create Event</button>
+</form>
+
+{% endblock %}

@@ -1,10 +1,14 @@
 <a href="{% url 'PoorEvents:index' %}">Home</a>
 <a href="{% url 'PoorEvents:event-list' %}">Event List</a>
+<a href="{% url 'PoorEvents:event-create' %}">Create New Event</a>
 
 {% if user.is_authenticated %}
-    <p>You are logged in as {{ user.username }}</p>
-    <p><a href="{% url 'PoorUsers:profile' user.pk %}">My Account</a></p>
-    <p><a href="{% url 'PoorUsers:logout' %}">Logout</a></p>
+    <p>
+        You are logged in as {{ user.username }} <a href="{% url 'PoorUsers:profile' user.pk %}">My Account</a> <a href="{% url 'PoorUsers:logout' %}">Logout</a>
+    </p>
 {% else %}
-    <p><a href="{% url 'PoorUsers:login' %}">Login</a></p>
+    <p>
+        <a href="{% url 'PoorUsers:login' %}">Login</a> 
+        <a href="{% url 'PoorUsers:register' %}">Register</a>
+    </p>
 {% endif %}

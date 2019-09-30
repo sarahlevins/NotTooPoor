@@ -1,14 +1,16 @@
 from django.urls import path
-import PoorEvents.views as views
+from PoorEvents.views import IndexView, EventListView, EventCreateView, EventDetailView, VenueDetailView
 from rest_framework import renderers
+
 
 app_name = 'PoorEvents'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('events/', views.EventListView.as_view(), name='event-list'),
-    path('events/<int:pk>/', views.EventDetailView.as_view(), name='event-detail'),
-    path('venues/<slug:slug>/', views.VenueDetailView.as_view(), name='venue-detail'),
+    path('', IndexView.as_view(), name='index'),
+    path('events/', EventListView.as_view(), name='event-list'),
+    path('event_create/', EventCreateView.as_view(), name='event-create'),
+    path('events/<int:pk>/', EventDetailView.as_view(), name='event-detail'),
+    path('venues/<slug:slug>/', VenueDetailView.as_view(), name='venue-detail'),
     ]
 
 

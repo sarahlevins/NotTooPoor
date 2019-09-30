@@ -19,6 +19,18 @@
         </li>
     {% endfor %}
 </ul>
+
+{{ customuser.event_set }}
+
+{% if user.username == customuser.username %}
+    <h3>Events you are attending:</h3>
+    {% for event in user.event_set.attendees.all %}
+        <li>
+            {{ event.event_name }}
+        </li>
+    {% endfor %}
+{% endif %}
+
 {% if user.username == customuser.username  %}
     <a href="{% url 'PoorUsers:update-account' user.pk %}">Update Profile</a>
 {% endif %}

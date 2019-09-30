@@ -20,8 +20,16 @@
 <p>Categories: {% for category in event.category.all %}{{ category }}{% endfor %}</p>
 
 {% if user.is_authenticated %}
-    <p>List of attendees:</p>
-    {% for attendees in event.attendees.all %}{{ attendees }} {% endfor %}
+
+    {% if event.attendees.all|length == 0 %}
+        <p>no one is attending this event</p>
+    {% else %}
+        <p>There are {{ event.attendees.all|length }} people attending this event</p>
+        Attendees: 
+        {% for user in event.attendees.all %}
+            <a href="{% url 'PoorUsers:profile' user.pk %}">{{ user }}</a>
+        {% endfor %}
+    {% endif %}
 
 {% endif %}
 
