@@ -4,19 +4,25 @@
 
 {% block content %}
 
-    <p>event detail content goes here.</p>
+<p>event detail content goes here.</p>
 
-    <p>Event name: {{ event.event_name }}</p>
-    <p>What: {{ event.event_description }}</p>
-    <p>Where: {{ event.event_venue }}</p>
-    <p>Start Time: {{ event.event_start_datetime }}</p>
-    <p>End Time: {{ event.event_end_datetime }}</p>
-    {% if event.event_photo %}
-        <p><img src='{{ event.event_photo.url }}'></p>
-    {% else %}    
-        <p>There is no photo for this event</p>
-    {% endif %}
-        <p>Host: {{ event.host }}</p>
-    <p>Categories: {% for category in event.category.all %}{{ category }}{% endfor %}</p>
+<p>Event name: {{ event.event_name }}</p>
+<p>What: {{ event.event_description }}</p>
+<p>Where: <a href="{% url 'PoorEvents:venue-detail' event.event_venue.slug %}">{{ event.event_venue }}</a></p>
+<p>Start Time: {{ event.event_start_datetime }}</p>
+<p>End Time: {{ event.event_end_datetime }}</p>
+{% if event.event_photo %}
+    <p><img src='{{ event.event_photo.url }}'></p>
+{% else %}    
+    <p>There is no photo for this event</p>
+{% endif %}
+<p>Host: <a href="{% url 'PoorUsers:profile' event.host.pk %}">{{ event.host }}</a></p>
+<p>Categories: {% for category in event.category.all %}{{ category }}{% endfor %}</p>
+
+{% if user.is_authenticated %}
+    <p>List of attendees:</p>
+    {% for attendees in event.attendees.all %}{{ attendees }} {% endfor %}
+
+{% endif %}
 
 {% endblock %}

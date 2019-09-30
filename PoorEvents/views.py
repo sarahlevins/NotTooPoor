@@ -33,6 +33,15 @@ class VenueDetailView(DetailView):
     template_name = 'venue_detail.html'
     context_object_name = 'venue'
 
+    # def single(request, slug):
+    #     try:
+    #         page = get_object_or_404(Pages, slug=slug)
+    #         context = {'page': page}
+    #         template = 'venue_detail.html'
+    #         return render(request, template, context)
+    #     except Pages.DoesNotExist:
+    #         raise Http404
+
 class VenueViewSet(viewsets.ModelViewSet):
     queryset = Venue.objects.all()
     serializer_class = VenueSerializer

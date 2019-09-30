@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ customuser.username }}</h2>
+<p>{{ customuser.first_name }}</p>
+
+
+{% if user.username == customuser.username %}
+    <h3>Events you are hosting:</h3>
+{% else %}
+    <h3>Events {{ customuser.username }} is hosting:</h3>
+{% endif %}
+
+<ul>
+    {% for event in customuser.event_set.all %}
+        <li>
+            <a href="{% url 'PoorEvents:event-detail' event.pk %}">{{ event.event_name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% if user.username == customuser.username  %}
+    <a href="{% url 'PoorUsers:update-account' user.pk %}">Update Profile</a>
+{% endif %}
+
+{% endblock %}

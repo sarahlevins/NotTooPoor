@@ -1,0 +1,10 @@
+<a href="{% url 'PoorEvents:index' %}">Home</a>
+<a href="{% url 'PoorEvents:event-list' %}">Event List</a>
+
+{% if user.is_authenticated %}
+    <p>You are logged in as {{ user.username }}</p>
+    <p><a href="{% url 'PoorUsers:profile' user.pk %}">My Account</a></p>
+    <p><a href="{% url 'PoorUsers:logout' %}">Logout</a></p>
+{% else %}
+    <p><a href="{% url 'PoorUsers:login' %}">Login</a></p>
+{% endif %}

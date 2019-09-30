@@ -21,6 +21,7 @@ router.register(r'userpreferences', EventViews.UserEventPreferencesViewSet)
 
 urlpatterns = [
     path('', include('PoorEvents.urls')),
+    path('users/', include('PoorUsers.urls')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path(r'api-auth-token/', views.obtain_auth_token),
