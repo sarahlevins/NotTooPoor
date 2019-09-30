@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <p>Venue name: {{ venue.venue_name }}</p>
+    <p>Address:
+        {% if venue.venue_streetnum %}
+            {{ venue.venue_streetnum }}
+        {% endif %}
+        {{ venue.venue_street }}, {{ venue.venue_suburb }}. {{ venue.venue_postcode }}
+    </p>
+    <p>Website: {{ venue.venue_website }}  </p>
+    <p>Contact: {{ venue.venue_email }}</p>
+        {% if venue.venue_photo %}
+        <p><img src='{{ venue.venue_photo.url }}'></p>
+    {% else %}    
+        <p>There is no photo for this venue</p>
+    {% endif %}
+
+{% endblock %}

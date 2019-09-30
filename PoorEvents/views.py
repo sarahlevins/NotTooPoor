@@ -7,12 +7,18 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView, T
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-class EventView(ListView):
+class EventListView(ListView):
     template_name = 'event_list.html'
-    queryset = Event.objects.all()
+    queryset = Event.objects.order_by('-event_start_datetime')
+    context_object_name = 'event_list'
 
     def get_queryset(self):
         return Event.objects.all()
+
+class EventDetailView(DetailView):
+    model = Event
+    template_name = 'event_detail.html'
+    context_object_name = 'event'
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
@@ -21,6 +27,11 @@ class EventViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+class VenueDetailView(DetailView):
+    model = Venue
+    template_name = 'venue_detail.html'
+    context_object_name = 'venue'
 
 class VenueViewSet(viewsets.ModelViewSet):
     queryset = Venue.objects.all()
