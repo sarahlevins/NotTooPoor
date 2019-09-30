@@ -17,7 +17,7 @@ class Event(models.Model):
     attendees = models.ManyToManyField('PoorUsers.CustomUser', related_name='attendees', default='')
 
     def get_absolute_url(self):
-        return reverse("PoorEvents:event", kwargs={"pk": self.pk})
+        return reverse("PoorEvents:event-detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.event_name

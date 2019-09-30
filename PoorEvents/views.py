@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, TemplateView
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from rest_framework import viewsets
+
 
 from PoorEvents.models import Event, Category, Venue, UserEventPreferences
 from .forms import NewEventForm

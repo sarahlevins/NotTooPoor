@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="post" novalidate>
+<form method="post" class="NewEventForm">
     {{ neweventform.media }}
     {% csrf_token %}
     {{ form.as_p }}

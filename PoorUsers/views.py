@@ -16,7 +16,6 @@ AUTHENTICATION
 
 class CustomUserRegister(CreateView):
     form_class = CreateCustomUserForm
-    success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
 class CustomUserLogin(LoginView):

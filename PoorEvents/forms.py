@@ -12,5 +12,6 @@ class NewEventForm(forms.ModelForm):
         'event_description', 
         'event_venue',
         'event_start_datetime',
-        'event_end_datetime', 
+        'event_end_datetime',
+        'event_photo', 
         'category',)
