@@ -38,3 +38,12 @@ class Venue(models.Model):
     
     def __str__(self):
         return self.venue_name
+
+class UserEventPreferences(models.Model):
+    user = models.OneToOneField('PoorUsers.CustomUser', on_delete=models.CASCADE, related_name='userpreferences', default='')
+    fav_category = models.ManyToManyField('Category', default='')
+    fav_venues = models.ManyToManyField('Venue', default='')
+    fav_events = models.ManyToManyField('Event', default='')
+
+    def __str__(self):
+        return self.user.username

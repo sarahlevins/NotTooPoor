@@ -2,19 +2,23 @@ from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import CustomUser, UserProfile
-
-class UserProfileInline(admin.StackedInline):
-    model = UserProfile
-    can_delete = False
+from .models import CustomUser
 
 
 @admin.register(CustomUser)
 class CustomUserAdmin(BaseUserAdmin):
+    """
+    fields that show when editing a user
+    """
     fieldsets = (
         (None, {'fields': (
-            'email', 
+            'username',
+            'first_name',
+            'last_name',
+            'dob',
+            'email',  
             'password', 
+            'category',
             )}),
         (('Permissions'), {'fields': (
             'is_active', 
@@ -31,15 +35,19 @@ class CustomUserAdmin(BaseUserAdmin):
         (None, {
             'classes': ('wide',),
             'fields': (
+                                'username',
+                'first_name',
+                'last_name',
+                'dob',
                 'email',  
                 'password1', 
-                'password2'
+                'password2',
+                'category',
                 ),
         }),
     )
     list_display = ('username','email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
-    inlines = (UserProfileInline, )
 
     
