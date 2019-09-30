@@ -2,21 +2,21 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from PoorEvents.models import Event, Category, Venue, UserEventPreferences
 from .serializers import EventSerializer, CategorySerializer, VenueSerializer, UserEventPreferencesSerializer
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView, TemplateView
 
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+class EventView(ListView):
+    template_name = 'event_list.html'
+    queryset = Event.objects.all()
+
+    def get_queryset(self):
+        return Event.objects.all()
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-
-class EventView(ListView):
-    template_name = 'PoorEvents/index.html'
-    queryset = Event.objects.all()
-    context_object_name = 'events-list'
-
-    def get_queryset(self):
-        '''Return the events.'''
-        return Event.objects.all()
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

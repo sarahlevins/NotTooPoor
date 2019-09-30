@@ -1,19 +1,12 @@
 from django.urls import path
-from PoorEvents.views import EventViewSet, EventView, CategoryViewSet, VenueViewSet
+import PoorEvents.views as views
 from rest_framework import renderers
-from rest_framework.urlpatterns import format_suffix_patterns
 
+app_name = 'PoorEvents'
 
-event_list = EventViewSet.as_view({
-    'get': 'list',
-})
+urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+    path('events/', views.EventView.as_view(), name='event-list')
+    ]
 
-event_detail = EventViewSet.as_view({
-    'get': 'retrieve',
-})
-
-urlpatterns = format_suffix_patterns([
-    path('', event_list, name='event-list'),
-    path('events/<int:pk>/', event_detail, name='user-detail')
-])
 
