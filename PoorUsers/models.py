@@ -12,8 +12,5 @@ class CustomUser(AbstractUser):
     photo = models.ImageField(upload_to='uploads', blank=True)
     category = models.ManyToManyField('PoorEvents.Category', blank=True, default='')
 
-    def get_absolute_url(self):
-        return reverse("PoorUsers:profile", kwargs={"pk": self.pk})
-
     def __str__(self):
         return self.username

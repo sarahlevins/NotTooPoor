@@ -24,6 +24,7 @@ app_name = 'PoorUsers'
 urlpatterns = [
     # path('users/', user_list, name='user-list'),
     path('register/', views.CustomUserRegister.as_view(), name='register'),
+    path('register_success/<int:pk>/', views.CustomUserRegisterSuccess.as_view(), name='register-success'),
     path('login/', views.CustomUserLogin.as_view(), name='login'),
     path('logout/', views.CustomUserLogout.as_view(), name='logout'),
     path('<int:pk>/', views.CustomUserDetail.as_view(), name='profile'),

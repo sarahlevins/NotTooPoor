@@ -18,6 +18,14 @@ class CustomUserRegister(CreateView):
     form_class = CreateCustomUserForm
     template_name = 'registration/register.html'
 
+    def get_success_url (self, **kwargs):
+        return reverse_lazy('PoorUsers:register-success', kwargs={'pk': self.object.pk})
+
+class CustomUserRegisterSuccess(DetailView):
+    model = CustomUser
+    context_object_name = 'user'
+    template_name = 'registration/register_success.html'
+
 class CustomUserLogin(LoginView):
     template_name = 'registration/login.html'
 

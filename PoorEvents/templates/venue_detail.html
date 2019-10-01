@@ -13,10 +13,18 @@
     </p>
     <p>Website: {{ venue.venue_website }}  </p>
     <p>Contact: {{ venue.venue_email }}</p>
-        {% if venue.venue_photo %}
+    {% if venue.venue_photo %}
         <p><img src='{{ venue.venue_photo.url }}'></p>
     {% else %}    
         <p>There is no photo for this venue</p>
     {% endif %}
+
+    {{ venue.event_set.all }}
+
+    <p>Events at this venue: 
+        {% for events in venue.event_set.all %}
+            {{ host }}
+        {% endfor  %}
+    </p>
 
 {% endblock %}

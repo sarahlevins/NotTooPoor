@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Thank you for registering {{ user.first_name }}</p>
+
+<p><a href="{% url 'PoorUsers:login' %}">Click Here</a> to log in and start being cheap, not poor.</p>
+
+{% endblock %}
